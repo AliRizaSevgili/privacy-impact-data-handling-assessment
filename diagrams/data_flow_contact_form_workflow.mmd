@@ -1,0 +1,18 @@
+flowchart TD
+    A[Customer opens contact form] --> B[Customer enters contact information]
+    B --> C[Customer enters free-text message]
+    C --> D[Backend route: contact]
+    D --> E[MongoDB contacts collection]
+    E --> F[Internal review or response handling]
+    F --> G[Email response through Gmail SMTP or comparable service]
+
+    B --> PI1[Personal information: name, email, contact number]
+    C --> PI2[Potential unexpected personal information in message body]
+    E --> R1[Privacy risk: inquiry records may be retained without defined deletion trigger]
+    F --> R2[Privacy risk: access to contact messages should be limited]
+    G --> R3[Privacy risk: response email may create a duplicate record]
+
+    PI2 --> S1[Expected safeguard: form notice and data minimization]
+    R1 --> S2[Expected safeguard: contact record retention rule]
+    R2 --> S3[Expected safeguard: need-to-know access]
+    R3 --> S4[Expected safeguard: email retention alignment]

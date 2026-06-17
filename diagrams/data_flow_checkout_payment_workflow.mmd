@@ -1,0 +1,20 @@
+flowchart TD
+    A[Customer starts checkout] --> B[Checkout form collects customer and reservation details]
+    B --> C[Backend route: save-checkout-info]
+    C --> D[MongoDB infos, orders, or reservations records]
+    C --> E[Redirect to Stripe hosted checkout]
+    E --> F[Stripe processes payment details externally]
+    F --> G[Stripe webhook event returns payment status]
+    G --> H[Internal application updates order or reservation status]
+    H --> I[Transactional confirmation email]
+
+    B --> PI1[Personal information: name, email, phone, address, reservation details]
+    F --> PI2[Cardholder data processed externally by Stripe]
+    G --> PI3[Payment status, transaction reference, payment amount]
+    D --> R1[Privacy risk: internal retained metadata remains privacy-relevant]
+    E --> R2[Privacy risk: vendor processing boundary should be documented]
+    I --> R3[Privacy risk: email may duplicate order and customer information]
+
+    R1 --> S1[Expected safeguard: retention, access, and logging rules]
+    R2 --> S2[Expected safeguard: vendor processing record]
+    R3 --> S3[Expected safeguard: email minimization and retention alignment]

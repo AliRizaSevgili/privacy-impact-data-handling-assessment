@@ -1,0 +1,18 @@
+flowchart TD
+    A[Customer browses available classes or services] --> B[Customer selects reservation option]
+    B --> C[Customer submits reservation details]
+    C --> D[Backend processes reservation request]
+    D --> E[MongoDB reservations collection]
+    E --> F[Reservation record created or updated]
+    F --> G[Internal operational review if needed]
+    F --> H[Confirmation or follow-up communication]
+
+    C --> PI1[Personal information: name, email, contact number, reservation details]
+    E --> R1[Privacy risk: retention rules should be documented]
+    G --> R2[Privacy risk: internal access should be role-based]
+    H --> R3[Privacy risk: email may duplicate personal information]
+
+    PI1 --> S1[Expected safeguard: data minimization and purpose limitation]
+    R1 --> S2[Expected safeguard: retention and deletion rule]
+    R2 --> S3[Expected safeguard: RBAC and access review]
+    R3 --> S4[Expected safeguard: email minimization]
